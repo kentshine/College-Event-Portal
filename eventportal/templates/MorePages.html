@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+ <title>More Events'</title>
+
+  <body>
+    <!-- <header class="header">
+      <img src="{{ url_for('static',filename='img/final.png') }}" class="logo" alt="logo of jyothi" />
+    </header> -->
+
+    <main>
+      <section class="section-events">
+        <h1 class="subheading">[More Events]</h1>
+        <div class="event-card-overview">
+          {% for event in events.items %}
+          <div class="event-card">
+            <img
+              src="{{ url_for('static',filename='event_wallpapers//' + event.wallpaper) }}"
+            />
+            <div class="event-card-body">
+              <p class="event-card-heading">
+                <a href="{{ url_for('events.event',event_id=event.id) }}"
+                  >{{ event.title }}</a
+                >
+              </p>
+              <p class="event-card-desc">{{ event.description[:50] }}...</p>
+              <ul class="event-stats">
+                <li>
+                  <i class="fa-solid fa-calendar-days"></i
+                  ><span>{{event.event_date}}</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-clock"></i
+                  ><span>{{event.event_time}}</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-location-dot"></i
+                  ><span>{{event.location}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+    message in messages %}
+    <div class="popup open-popup" id="popup">
+      <h1>{{ message }}</h1>
+      <button type="button" onclick="removeFlash()">Ok</button>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+  </body>
+</html>
+{% endblock %}
