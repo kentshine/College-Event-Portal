@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4df1de55-1a99-4ec5-b99d-15dc66ac248f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/eventportal/credentials.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eventportal/static/event_records/5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eventportal/static/event_wallpapers/None.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eventportal/static/event_wallpapers/None.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/token.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventportal/data.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/data.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/events/event_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/event_registration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/events/picture_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/picture_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/views.py" afterDir="false" />
@@ -25,7 +30,7 @@
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/api test 2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example 2.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example.webp" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/static/event_wallpapers/None.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/hjlafds.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/jodfasf.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/test 123.jpg" beforeDir="false" />
@@ -33,11 +38,7 @@
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/testing async.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/testing multithreading.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eventportal/templates/download.html" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/templates/download.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/6b0207911110_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/6b0207911110_.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/versions/e75d263d81d3_.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
