@@ -2,13 +2,13 @@ import os
 from flask import Flask
 from flask_migrate import Migrate
 from flask_admin import Admin
+from flask_admin.menu import MenuLink
 from flask_mail import Mail,Message
 from eventportal.models import User,Event
 from eventportal.models import login_manager,basic_auth,db
 from eventportal.models import EventView,UserView
 
 app = Flask(__name__)
-mail = Mail(app)
 
 ########## APP CONFIG #############
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
@@ -38,11 +38,11 @@ basic_auth.init_app(app)
 
 
 ## admin ##
+admin_id = 999
 admin = Admin(app, name='eventportal', template_mode='bootstrap3')
 admin.add_view(EventView(Event,db.session))
 admin.add_view(UserView(User,db.session))
-
-
+admin.add_link(MenuLink(name='Events', url='/download', category='Download'))
 
 
 

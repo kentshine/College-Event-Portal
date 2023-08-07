@@ -1,15 +1,16 @@
 from datetime import datetime
-from flask import render_template, url_for, redirect, request, Blueprint,flash,abort
+import os
+from flask import render_template, url_for, redirect, request, Blueprint,flash,abort,send_file
 from flask_login import current_user,login_required
-from eventportal import db
+from eventportal import db,admin_id
 from eventportal.models import Event,User
 from eventportal.events.picture_handler import add_wallpaper,delete_wallpaper
 from eventportal.events.event_registration import add_user,delete_records
 from eventportal.events.email_handler import send_email
 from eventportal.events.forms import CreateEventForm
 from eventportal.registration import create_calendar_event,update_calendar_event
-from eventportal import admin_id
 from eventportal import background_threading
+from eventportal.models import basic_auth
 
 events = Blueprint('events',__name__)
 
@@ -22,8 +23,7 @@ def create():
         event = Event(title=form.title.data,user_id=admin_id,location=form.location.data,event_date=form.event_date.raw_data[0],event_time=form.event_time.raw_data[0],description=form.description.data,calendar_id=calendar_id)
         if request.files['wallpaper']:
             wallpaper = request.files['wallpaper']
-            event_name = form.title.data
-            pic = add_wallpaper(wallpaper,event_name)
+            pic = add_wallpaper(wallpaper,event.id)
             event.wallpaper = pic
 
         '''
@@ -41,7 +41,7 @@ def create():
         print(event)
         next_page = request.args.get('next')
         if next_page is None or not next_page[0]=="/":
-            next_page=url_for('core.index')
+            next_page="/admin"
         return redirect(next_page)
 
 
@@ -81,7 +81,19 @@ def event_listview():
     return render_template("MorePages.html",events=events)
 
 
+@events.route("/download")
+@basic_auth.required
+def download():
+    page = request.args.get('page',1,type=int)
+    events = Event.query.paginate(page=page,per_page=10)
+    return render_template("download.html",events=events)
 
+@events.route("/download-file/<int:event_id>")
+def download_file(event_id):
+    event = Event.query.get_or_404(event_id)
+    basedir = os.path.abspath(os.getcwd())
+    path = os.path.join(basedir, 'eventportal\\static\\event_records\\'+str(event.id)+'.csv')
+    return send_file(path,as_attachment=True)
 
 
 '''

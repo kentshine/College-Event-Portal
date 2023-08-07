@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4df1de55-1a99-4ec5-b99d-15dc66ac248f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/eventportal/credentials.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/data.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/events/event_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/event_registration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/events/picture_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/picture_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/events/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/css/download.css" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/static/css/download.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_records/1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_records/4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_records/6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/23.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/231.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/23213.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/321.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/3213.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/Test 123.jfif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/api test 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example 2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/example.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/hjlafds.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/jodfasf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/test 123.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/testing 123.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/testing async.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/static/event_wallpapers/testing multithreading.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventportal/templates/download.html" beforeDir="false" afterPath="$PROJECT_DIR$/eventportal/templates/download.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/versions/6b0207911110_.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TerLpc2cDItTv8zufiIHJPpgzC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\College-Event-Portal\eventportal" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4df1de55-1a99-4ec5-b99d-15dc66ac248f" name="Changes" comment="" />
+      <created>1691414336577</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1691414336577</updated>
+    </task>
+    <servers />
+  </component>
+</project>

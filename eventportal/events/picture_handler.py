@@ -3,11 +3,11 @@ from pathlib import Path
 from PIL import Image
 from flask import url_for,current_app
 
-def add_wallpaper(pic_upload,event_name):
+def add_wallpaper(pic_upload,event_id):
     filename = pic_upload.filename
     print("File name : ", filename)
     ext_type = filename.split('.')[-1]
-    storage_filename = str(event_name) + '.' + ext_type
+    storage_filename = str(event_id) + '.' + ext_type
 
     filepath = os.path.join(current_app.root_path,'static\event_wallpapers',storage_filename)
 
