@@ -136,8 +136,9 @@ small {
 }
 
 .down-event-card img {
-  width: auto;
-  height: auto;
+  width: 100%; /* Set the image width to 100% of its container */
+  height: 170px; /* Set the desired fixed height for the image */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
   border-radius: 16px 16px 0px 0px;
 }
 
