@@ -59,7 +59,7 @@ small {
 }
 
 /* HEADER STICKY */
-.sticky .down-header {
+.sticky .header {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -102,6 +102,7 @@ small {
   text-transform: uppercase;
   font-size: 2.4rem;
   text-align: center;
+  margin-bottom: 4rem;
 }
 
 .down-section-events {
@@ -121,22 +122,22 @@ small {
 .down-event-card-overview {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  max-width: 150rem;
-  gap: 2rem;
-  margin-top: 3rem;
+  max-width: 200rem;
+  gap: 3rem;
+  /* margin-top: 3rem; */
 }
 
 .down-event-card {
+  height: auto;
   border: 1px solid rgba(230, 230, 230, 0.6);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   transition: all 200ms ease-in;
-  height: auto;
 }
 
 .down-event-card img {
-  width: 36rem;
-  height: 30rem;
+  width: auto;
+  height: auto;
   border-radius: 16px 16px 0px 0px;
 }
 
@@ -180,24 +181,24 @@ small {
   background: white;
 }
 
-.event-types-overview {
+.down-event-types-overview {
   margin: 4rem auto;
   font-size: 1.8rem;
   font-weight: 500;
   text-align: center;
 }
 
-.event-types-overview span {
+.down-event-types-overview span {
   color: #7c7c7c;
 }
 
-.event-types-overview .event-types-list {
+.down-event-types-overview {
   margin: 3rem 2rem;
   transform: scale(1.2);
   line-height: 4rem;
 }
 
-.event-types-overview .event-types-list li {
+.down-event-types-overview li {
   white-space: nowrap;
 }
 
@@ -214,6 +215,7 @@ button {
 }
 
 .down-evebtn {
+  margin-top: 20px; /* Add some spacing between the button and other content */
   border-radius: 40px;
   font-size: 1.7rem;
   font-weight: 800;
@@ -221,12 +223,11 @@ button {
   background-color: #6ba3e7;
   color: white;
   cursor: pointer;
+  margin-left: 4rem;
 }
 
 .down-container {
   width: 24rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .outline-evebtn {

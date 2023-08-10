@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <header class="down-header">
+    <header class="header">
       <img src="{{ url_for('static',filename='img/final.png') }}" class="logo" alt="logo of jyothi" />
     </header>
     <main>
@@ -40,7 +40,7 @@
           <div class="down-event-card">
             <img
               src="{{ url_for('static',filename='event_wallpapers//' + event.wallpaper) }}"
-            />
+            /> 
             <div class="down-event-card-body">
               <p class="down-event-card-heading">{{event.title}}</p>
               
@@ -54,13 +54,19 @@
                   <i class="fa-solid fa-location-dot"></i><span>{{event.location}}</span>
                 </li>
               </ul>
-              <div class="down-container">
-                <a href="{{ url_for('events.download_file',event_id=event.id) }}" class="down-evebtn">Download Sheet</a>
-              </div>              
+                  <div class="down-container"> 
+                <a href="{{ url_for('events.download_file',event_id=event.id) }}"
+                  class="down-evebtn">Download Sheet</a>
+                </div>               
             </div>
           </div>
           {% endfor %}
-        </div>
+          </div>
+
       </section>
+
+
+    
   </body>
 </html>
+ 
