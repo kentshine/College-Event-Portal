@@ -39,7 +39,7 @@ basic_auth.init_app(app)
 
 ## admin ##
 admin_id = 999
-admin = Admin(app, name='eventportal', template_mode='bootstrap3')
+admin = Admin(app, name='AdminDesk', template_mode='bootstrap3')
 admin.add_view(EventView(Event,db.session))
 admin.add_view(UserView(User,db.session))
 admin.add_link(MenuLink(name='Events', url='/download', category='Download'))
