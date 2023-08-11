@@ -23,7 +23,7 @@ def create():
         event = Event(title=form.title.data,user_id=admin_id,location=form.location.data,event_date=form.event_date.raw_data[0],event_time=form.event_time.raw_data[0],description=form.description.data,calendar_id=calendar_id)
         if request.files['wallpaper']:
             wallpaper = request.files['wallpaper']
-            pic = add_wallpaper(wallpaper,event.id)
+            pic = add_wallpaper(wallpaper,event.title)
             event.wallpaper = pic
 
         '''
