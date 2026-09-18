@@ -1,16 +1,15 @@
 import threading
-from flask_login import LoginManager
+import uuid
+from datetime import datetime
+from flask_login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose
-from flask import redirect,render_template,url_for,Response
-from flask_basicauth import BasicAuth
+from flask import redirect,render_template,url_for,Response,request
 from werkzeug.exceptions import HTTPException
 
-
-basic_auth = BasicAuth()
 db = SQLAlchemy()
 login_manager = LoginManager()
 
@@ -25,27 +24,22 @@ registered = db.Table('registered',
                       )
 
 class EventView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('users.login', next=request.url))
+
     @expose('/new/', methods=('GET', 'POST'))
     def create_view(self):
         return redirect(url_for('events.create'))
 
-class AuthException(HTTPException):
-    def __init__(self,message):
-        super().__init__(message,Response(
-            message,401,
-            {'WWW-Authenticate': 'Basic realm="Login Required"'}
-        ))
-
-
 class UserView(ModelView):
     def is_accessible(self):
-        if not basic_auth.authenticate():
-            raise AuthException('Not authenticated. Refresh the page.')
-        else:
-            return True
+        return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(basic_auth.challenge())
+        return redirect(url_for('users.login', next=request.url))
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -54,6 +48,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
+    is_admin = db.Column(db.Boolean, default=False)
     event = db.relationship('Event', backref='creator', lazy=True)
     department = db.Column(db.String(64))
     semester = db.Column(db.String(64))
@@ -89,7 +84,7 @@ class Event(db.Model):
     calendar_id = db.Column(db.String,nullable=False)
     wallpaper = db.Column(db.String,nullable=False,default="nothing.jpg")
 
-    def __int__(self,user_id,title,event_date,event_time,location,description,calendar_id):
+    def __init__(self,user_id,title,event_date,event_time,location,description,calendar_id):
         self.user_id = user_id
         self.title = title
         self.event_date = event_date
@@ -101,6 +96,17 @@ class Event(db.Model):
     def __repr__(self):
         return f"Event Id: {self.id} --- Date: {self.event_date} --- Title: {self.title} --- Created By:{self.user_id}"
 
+class Ticket(db.Model):
+    __tablename__ = 'tickets'
+    id = db.Column(db.Integer, primary_key=True)
+    ticket_number = db.Column(db.String(36), unique=True, default=lambda: str(uuid.uuid4()))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+    booking_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship('User', backref=db.backref('my_tickets', lazy=True, overlaps="coming,registered_events"))
+    event = db.relationship('Event', backref=db.backref('event_tickets', lazy=True))
+
 
 
 class NewThreadedTask(threading.Thread):
@@ -110,5 +116,5 @@ class NewThreadedTask(threading.Thread):
     def run(self):
         try:
             print("threaded task has been completed")
-        except:
+        except Exception:
             print("Error Occured !!")

@@ -8,19 +8,28 @@ from eventportal.events.picture_handler import add_wallpaper,delete_wallpaper
 from eventportal.events.event_registration import add_user,delete_records
 from eventportal.events.email_handler import send_email
 from eventportal.events.forms import CreateEventForm
-from eventportal.registration import create_calendar_event,update_calendar_event
 from eventportal import background_threading
-from eventportal.models import basic_auth
+from functools import wraps
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated or not getattr(current_user, 'is_admin', False):
+            flash("You must be an admin to access this page.", "danger")
+            return redirect(url_for('users.login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 events = Blueprint('events',__name__)
 
 @events.route('/create',methods=['GET','POST'])
+@login_required
+@admin_required
 def create():
     form = CreateEventForm()
 
     if form.validate_on_submit():
-        calendar_id = create_calendar_event(title=form.title.data, description=form.description.data, location=form.location.data,date=form.event_date.raw_data[0], time=form.event_time.raw_data[0])
-        event = Event(title=form.title.data,user_id=admin_id,location=form.location.data,event_date=form.event_date.raw_data[0],event_time=form.event_time.raw_data[0],description=form.description.data,calendar_id=calendar_id)
+        event = Event(title=form.title.data,user_id=current_user.id,location=form.location.data,event_date=form.event_date.raw_data[0],event_time=form.event_time.raw_data[0],description=form.description.data,calendar_id='local_db')
         if request.files['wallpaper']:
             wallpaper = request.files['wallpaper']
             pic = add_wallpaper(wallpaper,event.title)
@@ -57,21 +66,22 @@ def event(event_id):
             flash("You need to have account to register !!")
         else:
             user = User.query.filter_by(id=current_user.id).first()
-            for student in event.coming:
-                if student.email == user.email:
-                    registered_before = True
-            if not registered_before:
-                event.coming.append(user)
+            from eventportal.models import Ticket
+            existing_ticket = Ticket.query.filter_by(user_id=user.id, event_id=event.id).first()
+            if not existing_ticket:
+                ticket = Ticket(user_id=user.id, event_id=event.id)
+                db.session.add(ticket)
                 db.session.commit()
                 add_user(user.id,event.id)
-                update_calendar_event(calendar_id='primary',event_id=event.calendar_id,new_guest=user.email)
-                flash(send_email(event_id=event.id,user_id=user.id))
-                redirect(url_for('core.index'))
-                print(user.email , " has been registered to " , event.title)
-            elif registered_before:
-                flash("You are already registered !!")
-                print(user.email, " has been already registered to ", event.title)
-                redirect(url_for('events.event_listview'))
+                try:
+                    flash(send_email(event_id=event.id,user_id=user.id))
+                except Exception as e:
+                    pass
+                flash("Ticket booked successfully!")
+                return redirect(url_for('users.my_tickets'))
+            else:
+                flash("You are already registered for this event!")
+                return redirect(url_for('events.event_listview'))
     return render_template("eventpage.html",id=event.id,title=event.title,location=event.location,event_date=event.event_date,event_time=event.event_time,description=event.description,event_wallpaper=event_wallpaper)
 
 @events.route("/event-list")
@@ -82,7 +92,8 @@ def event_listview():
 
 
 @events.route("/download")
-@basic_auth.required
+@login_required
+@admin_required
 def download():
     page = request.args.get('page',1,type=int)
     events = Event.query.paginate(page=page,per_page=10)
@@ -92,7 +103,7 @@ def download():
 def download_file(event_id):
     event = Event.query.get_or_404(event_id)
     basedir = os.path.abspath(os.getcwd())
-    path = os.path.join(basedir, 'eventportal\\static\\event_records\\'+str(event.id)+'.csv')
+    path = os.path.join(basedir, 'eventportal', 'static', 'event_records', str(event.id) + '.csv')
     return send_file(path,as_attachment=True)
 
 

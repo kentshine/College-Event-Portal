@@ -9,5 +9,6 @@ class CreateEventForm(FlaskForm):
     event_date = DateField('Date',validators=[DataRequired()])
     event_time = TimeField('Time',validators=[DataRequired()])
     location = SelectField('Location', choices=[("Main Hall","Main Hall"),("Alumini Corner","Alumini Corner"),("Hall No .1","Hall No .1"),("Hall No .2","Hall No .2")] , validators=[DataRequired()])
+    wallpaper = FileField('Event Banner', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Create')
 

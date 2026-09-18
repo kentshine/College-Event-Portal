@@ -128,7 +128,10 @@ small {
 }
 
 .down-event-card {
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
   border: 1px solid rgba(230, 230, 230, 0.6);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
@@ -137,14 +140,14 @@ small {
 
 .down-event-card img {
   width: 100%; /* Set the image width to 100% of its container */
-  height: 170px; /* Set the desired fixed height for the image */
+  height: 200px; /* Set the desired fixed height for the image */
   object-fit: cover; /* Maintain aspect ratio and cover the container */
   border-radius: 16px 16px 0px 0px;
 }
 
 .down-event-card-body {
   padding: 2.2rem 2rem;
-  height: auto;
+  flex: 1;
 }
 
 .down-event-card-heading {

@@ -19,8 +19,8 @@ def get_g_service(service="gmail",ver="v1",scopes=['https://www.googleapis.com/a
             flow = InstalledAppFlow.from_client_secrets_file(SECRET_FILE, scopes)
             creds = flow.run_local_server(port=8080)
         # Save the credentials for the next run
-    with open('token.json', 'w') as token:
-        token.write(creds.to_json())
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
     return build(service, ver, credentials=creds)
 
 

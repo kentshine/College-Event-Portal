@@ -9,7 +9,7 @@ def add_wallpaper(pic_upload,event_name):
     ext_type = filename.split('.')[-1]
     storage_filename = str(event_name) + '.' + ext_type
 
-    filepath = os.path.join(current_app.root_path,'static\event_wallpapers',storage_filename)
+    filepath = os.path.join(current_app.root_path, 'static', 'event_wallpapers', storage_filename)
 
     output_size = (700,700)
 
@@ -21,5 +21,5 @@ def add_wallpaper(pic_upload,event_name):
 
 
 def delete_wallpaper(event_wallpaper):
-    filepath = Path(current_app.root_path,'static\event_wallpapers',event_wallpaper)
+    filepath = Path(current_app.root_path, 'static', 'event_wallpapers', event_wallpaper)
     filepath.unlink()

@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="{{ url_for('static',filename='js/script.js') }}"></script>
+    <script defer src="{{ url_for('static',filename='js/script.js') }}"></script>
 
     <!-- Favicon -->
     <link
@@ -60,7 +60,7 @@
       type="text/css"
     />
     <link
-      href="{{ url_for('static',filename='css/MorePagres-style.css') }}"
+      href="{{ url_for('static',filename='css/MorePages-style.css') }}"
       rel="stylesheet"
       type="text/css"
     />
@@ -82,14 +82,12 @@
       src="https://kit.fontawesome.com/8b02daf965.js"
       crossorigin="anonymous"
     ></script>
-    <title>CollegeEventPortal</title>
+    <title>{% block title %}CollegeEventPortal{% endblock %}</title>
 
   </head>
   <body>
 
     <header class="navheader">
-      <a href="{{ url_for('core.index') }}"
-      > 
       <a href="{{ url_for('core.index') }}">
         <img
           src="{{ url_for('static', filename='img/final.png') }}"
@@ -100,19 +98,68 @@
 
       <ul class="main-nav-list">
         <li>
-          <a href="#events" class="nav-link">Events</a>
+          <a href="{{ url_for('core.index') }}#events" class="nav-link">Events</a>
         </li>
         <li>
-          <a href="#feedback" class="nav-link">Feedback</a>
+          <a href="{{ url_for('core.index') }}#feedback" class="nav-link">Feedback</a>
         </li>
         <li>
-          <a href="#footer" class="nav-link">Contact Us</a>
+          <a href="{{ url_for('core.index') }}#footer" class="nav-link">Contact Us</a>
         </li>
         <li>
           <a href="https://www.jecc.ac.in/" class="nav-link">About</a>
         </li>
       </ul>
+
       <nav class="main-nav">
+        <!-- Mobile-only page links (shown in hamburger) -->
+        <a href="{{ url_for('core.index') }}#events" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-calendar-days"></i> Events
+        </a>
+        <a href="{{ url_for('core.index') }}#feedback" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-comment"></i> Feedback
+        </a>
+        <a href="{{ url_for('core.index') }}#footer" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-envelope"></i> Contact Us
+        </a>
+        <a href="https://www.jecc.ac.in/" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-circle-info"></i> About
+        </a>
+
+        <div class="mobile-divider mobile-order"></div>
+
+        {% if current_user.is_authenticated %}
+        <!-- Desktop: username + dropdown -->
+        <div class="desktop-order nav-user-group">
+          <a href="#" class="navbtnprofile nav-link">{{ current_user.username }}</a>
+          <div class="dropdown">
+            <button class="dropdown-button" id="dropdown-toggle-btn">
+              <span class="arrow">&#9662;</span>
+            </button>
+            <div id="dropdown-content" class="dropdown-content">
+              <a href="{{ url_for('users.my_tickets') }}"><i class="fa-solid fa-ticket"></i> My Tickets</a>
+              {% if current_user.is_admin %}
+              <a href="/admin"><i class="fa-solid fa-gauge-high"></i> Admin Desk</a>
+              {% endif %}
+              <a href="{{ url_for('users.logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+            </div>
+          </div>
+        </div>
+        <!-- Mobile: links shown in hamburger menu -->
+        <span class="navbtnprofile mobile-order nav-link" style="text-align: center; margin-bottom: 10px;">👤 {{ current_user.username }}</span>
+        <a href="{{ url_for('users.my_tickets') }}" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-ticket"></i> My Tickets
+        </a>
+        {% if current_user.is_admin %}
+        <a href="/admin" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-gauge-high"></i> Admin Desk
+        </a>
+        {% endif %}
+        <a href="{{ url_for('users.logout') }}" class="navbtn solid-navbtn mobile-order nav-link">
+          <i class="fa-solid fa-right-from-bracket"></i> Log Out
+        </a>
+
+        {% else %}
         <a
           href="{{ url_for('users.register') }}"
           class="navbtn solid-navbtn mobile-order nav-link"
@@ -123,29 +170,16 @@
           class="navbtn solid-navbtn desktop-order nav-link"
           ><i class="fa-regular fa-calendar-check"></i> Sign Up</a
         >
-        
-        {% if current_user.is_authenticated %}
-        <a href="{{ url_for('users.logout') }}" class="navbtnprofile desktop-order nav-link"
-          >{{ current_user.username }}
-        </a>
-        <div class="dropdown">
-          <button onclick="toggleDropdown()" class="dropdown-button">
-            <span class="arrow">&#9662;</span>
-          </button>
-          <div id="dropdown-content" class="dropdown-content">
-            <a href="{{ url_for('users.logout') }}">Log Out</a>
-          </div>
-        </div>
-
-        {% else %}
         <a
           href="{{ url_for('users.login') }}"
           class="navbtn solid-navbtn mobile-order nav-link"
-          ><i class="fa-regular fa-calendar-check"> </i> Sign In</a
+          ><i class="fa-solid fa-right-to-bracket"></i> Sign In</a
         >
-        <!-- <a href="{{ url_for('users.login') }}" class="navbtn solid-navbtn desktop-order nav-link"
-          ><i class="fa-regular fa-calendar-check"></i> Sign  In</a
-        > -->
+        <a
+          href="{{ url_for('users.login') }}"
+          class="navbtn solid-navbtn desktop-order nav-link"
+          ><i class="fa-solid fa-right-to-bracket"></i> Sign In</a
+        >
         {% endif %}
       </nav>
 
@@ -159,41 +193,69 @@
       </button>
     </header>
    {% block content %} {% endblock %}
-  </body>
 
 
   <!-- JS -->
 
   <script>
     /* HAMBURGER MENU */
-    const navButton = document.querySelector(".mobile-nav-btn");
-    const headerElement = document.querySelector(".navheader");
+    var navButton = document.querySelector(".mobile-nav-navbtn");
+    var headerElement = document.querySelector(".navheader");
 
-    navButton.addEventListener("click", function () {
-      headerElement.classList.toggle("nav-open");
-    });
+    if (navButton) {
+      navButton.addEventListener("click", function () {
+        headerElement.classList.toggle("nav-open");
+      });
+    }
 
     /* STICKY NAVIGATION */
-    const heroElement = document.querySelector(".section-hero");
-    const navObserver = new IntersectionObserver(
-      function (entries) {
-        const ent = entries[0];
-        if (ent.isIntersecting === false) {
-          document.body.classList.add("sticky");
-        } else {
-          document.body.classList.remove("sticky");
+    var heroElement = document.querySelector(".section-hero");
+    if (heroElement) {
+      var navObserver = new IntersectionObserver(
+        function (entries) {
+          var ent = entries[0];
+          if (ent.isIntersecting === false) {
+            document.body.classList.add("sticky");
+          } else {
+            document.body.classList.remove("sticky");
+          }
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: "-80px",
         }
-      },
-      {
-        root: null,
-        threshold: 0,
-        rootMargin: "-80px",
+      );
+
+      navObserver.observe(heroElement);
+    }
+
+    /* DROPDOWN MENU */
+    var dropdownToggleBtn = document.getElementById("dropdown-toggle-btn");
+    if (dropdownToggleBtn) {
+      dropdownToggleBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var dropdown = document.getElementById("dropdown-content");
+        if (dropdown) {
+          dropdown.classList.toggle("show");
+        }
+      });
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    document.addEventListener("click", function(e) {
+      var dropdown = document.getElementById("dropdown-content");
+      var dropdownContainer = document.querySelector(".dropdown");
+      if (dropdown && dropdown.classList.contains("show")) {
+        if (dropdownContainer && !dropdownContainer.contains(e.target)) {
+          dropdown.classList.remove("show");
+        }
       }
-    );
-
-    navObserver.observe(heroElement);
-
+    });
     
   </script>
+
+  </body>
 
 </html>
