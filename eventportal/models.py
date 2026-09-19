@@ -42,9 +42,8 @@ class MyAdminIndexView(AdminIndexView):
         return self.render('admin/index.html', events=events, event_attendees=event_attendees)
 
 class EventView(ModelView):
-    # Exclude all relationship backrefs so Flask-Admin doesn't
-    # try to update tickets/users and nullify event_id or user_id
-    form_excluded_columns = ['users', 'coming', 'event_tickets']
+    # Only include literal columns, completely exclude all relationships to prevent NotNull violations
+    form_columns = ['title', 'event_date', 'event_time', 'location', 'description', 'calendar_id', 'wallpaper']
 
     def is_accessible(self):
         return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
@@ -57,10 +56,8 @@ class EventView(ModelView):
         return redirect(url_for('events.create'))
 
 class UserView(ModelView):
-    # Exclude relationship fields to prevent Flask-Admin from
-    # accidentally nullifying event_id when saving a user
-    form_excluded_columns = ['my_tickets', 'registered_events', 'event']
-    column_exclude_list = ['password_hash']
+    # Only include literal columns, completely exclude all relationships to prevent NotNull violations
+    form_columns = ['username', 'email', 'department', 'semester', 'is_admin']
 
     def is_accessible(self):
         return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
