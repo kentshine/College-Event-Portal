@@ -53,6 +53,11 @@ class EventView(ModelView):
         return redirect(url_for('events.create'))
 
 class UserView(ModelView):
+    # Exclude relationship fields to prevent Flask-Admin from
+    # accidentally nullifying event_id when saving a user
+    form_excluded_columns = ['my_tickets', 'registered_events', 'event']
+    column_exclude_list = ['password_hash']
+
     def is_accessible(self):
         return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
 
