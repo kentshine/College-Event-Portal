@@ -10,11 +10,11 @@
 
 <hr>
 
-## 📖 Introduction
+##  Introduction
 
 **College Event Portal** is a user-friendly website created with HTML, CSS, JavaScript, and Flask, tailored to streamline event registration processes within college campuses. The website provides a seamless experience for both event organizers and participants, offering a comprehensive platform to browse, register, and manage various events.
 
-## ✨ Key Features
+##  Key Features
 
 - **User Authentication:** Secure login and registration for students to browse and manage their events.
 - **Event Dashboard:** A modern, responsive grid to discover new events happening around the campus.
@@ -30,7 +30,7 @@
 - **Database:** PostgreSQL (Production) / SQLite (Development)
 - **Deployment:** Hosted live on Render
 
-## 🚀 Installation & Local Development
+##  Installation & Local Development
 
 To run this project locally on your machine, follow these steps:
 
@@ -60,11 +60,11 @@ To run this project locally on your machine, follow these steps:
    ```
    *The app will be accessible at http://127.0.0.1:5000*
 
-## 🤝 Acknowledgements
+##  Acknowledgements
 
 * [Ejin](https://github.com/ejinbt/)
 * [WOC](https://discord.com/invite/program)
 
-## 📄 License
+##  License
 
 Distributed under the MIT License. See `LICENSE` for more information.
