@@ -42,6 +42,10 @@ class MyAdminIndexView(AdminIndexView):
         return self.render('admin/index.html', events=events, event_attendees=event_attendees)
 
 class EventView(ModelView):
+    # Exclude all relationship backrefs so Flask-Admin doesn't
+    # try to update tickets/users and nullify event_id or user_id
+    form_excluded_columns = ['users', 'coming', 'event_tickets']
+
     def is_accessible(self):
         return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
 
