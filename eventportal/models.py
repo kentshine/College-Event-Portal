@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_admin.contrib.sqla import ModelView
-from flask_admin import BaseView, expose
+from flask_admin import BaseView, expose, AdminIndexView
 from flask import redirect,render_template,url_for,Response,request
 from werkzeug.exceptions import HTTPException
 
@@ -22,6 +22,18 @@ registered = db.Table('registered',
                       db.Column('user_id',db.Integer,db.ForeignKey('users.id'),primary_key=True),
                       db.Column('event_id',db.Integer,db.ForeignKey('event.id'),primary_key=True)
                       )
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('users.login', next=request.url))
+
+    @expose('/')
+    def index(self):
+        events = Event.query.order_by(Event.event_date.asc()).all()
+        return self.render('admin/index.html', events=events)
 
 class EventView(ModelView):
     def is_accessible(self):

@@ -73,11 +73,20 @@ def event(event_id):
                 db.session.add(ticket)
                 db.session.commit()
                 add_user(user.id,event.id)
+                from threading import Thread
+                from flask import current_app
+                def send_async_email(app, e_id, u_id):
+                    with app.app_context():
+                        try:
+                            send_email(event_id=e_id, user_id=u_id)
+                        except Exception:
+                            pass
+                
                 try:
-                    flash(send_email(event_id=event.id,user_id=user.id))
+                    Thread(target=send_async_email, args=(current_app._get_current_object(), event.id, user.id)).start()
+                    flash("Ticket booked successfully! A confirmation email is being sent.")
                 except Exception as e:
-                    pass
-                flash("Ticket booked successfully!")
+                    flash("Ticket booked successfully!")
                 return redirect(url_for('users.my_tickets'))
             else:
                 flash("You are already registered for this event!")

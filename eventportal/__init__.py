@@ -6,7 +6,7 @@ from flask_admin.menu import MenuLink
 from flask_mail import Mail,Message
 from eventportal.models import User,Event
 from eventportal.models import login_manager,db
-from eventportal.models import EventView,UserView
+from eventportal.models import EventView,UserView,MyAdminIndexView
 
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ migrate = Migrate(app,db)
 
 ## admin ##
 admin_id = 999
-admin = Admin(app, name='AdminDesk', template_mode='bootstrap4', base_template='admin/master.html')
+admin = Admin(app, name='AdminDesk', template_mode='bootstrap4', base_template='admin/master.html', index_view=MyAdminIndexView())
 admin.add_view(EventView(Event,db.session))
 admin.add_view(UserView(User,db.session))
 admin.add_link(MenuLink(name='Events', url='/download', category='Download'))
