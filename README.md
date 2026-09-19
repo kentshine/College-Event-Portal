@@ -23,7 +23,7 @@
 - **Email Notifications:** Background threading implemented to seamlessly send confirmation emails to users upon event registration.
 - **Fully Responsive:** Optimized for desktops, tablets, and mobile devices.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Backend:** Python, Flask, Flask-SQLAlchemy, Flask-Login, Flask-Mail
 - **Frontend:** HTML5, Vanilla CSS3 (Custom Responsive Grid), JavaScript
