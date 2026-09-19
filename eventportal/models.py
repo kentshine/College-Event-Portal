@@ -32,8 +32,14 @@ class MyAdminIndexView(AdminIndexView):
 
     @expose('/')
     def index(self):
+        from eventportal.models import Ticket
         events = Event.query.order_by(Event.event_date.asc()).all()
-        return self.render('admin/index.html', events=events)
+        # Build a dict of event_id -> list of users for template use
+        event_attendees = {}
+        for event in events:
+            tickets = Ticket.query.filter_by(event_id=event.id).all()
+            event_attendees[event.id] = [t.user for t in tickets]
+        return self.render('admin/index.html', events=events, event_attendees=event_attendees)
 
 class EventView(ModelView):
     def is_accessible(self):
