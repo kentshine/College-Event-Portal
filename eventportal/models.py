@@ -128,8 +128,8 @@ class Ticket(db.Model):
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     booking_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    user = db.relationship('User', backref=db.backref('my_tickets', lazy=True, overlaps="coming,registered_events"))
-    event = db.relationship('Event', backref=db.backref('event_tickets', lazy=True))
+    user = db.relationship('User', backref=db.backref('my_tickets', lazy=True, viewonly=True, overlaps="coming,registered_events"))
+    event = db.relationship('Event', backref=db.backref('event_tickets', lazy=True, viewonly=True))
 
 
 
