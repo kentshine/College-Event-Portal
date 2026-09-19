@@ -106,7 +106,7 @@ class Event(db.Model):
     location = db.Column(db.String,nullable=False)
     description = db.Column(db.Text, nullable=False)
     calendar_id = db.Column(db.String,nullable=False)
-    wallpaper = db.Column(db.String,nullable=False,default="nothing.jpg")
+    wallpaper = db.Column(db.String, nullable=False, default="https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg")
 
     def __init__(self,user_id,title,event_date,event_time,location,description,calendar_id):
         self.user_id = user_id

@@ -59,7 +59,7 @@ def create():
 @events.route("/<int:event_id>",methods=["GET","POST"])
 def event(event_id):
     event = Event.query.get_or_404(event_id)
-    event_wallpaper = url_for('static',filename='event_wallpapers//'+event.wallpaper)
+    event_wallpaper = event.wallpaper
     if request.method == "POST":
         registered_before = False
         if  current_user.is_authenticated == False:

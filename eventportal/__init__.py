@@ -7,6 +7,9 @@ from flask_mail import Mail,Message
 from eventportal.models import User,Event
 from eventportal.models import login_manager,db
 from eventportal.models import EventView,UserView,MyAdminIndexView
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 app = Flask(__name__)
 
@@ -21,6 +24,14 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 ## mail ###
 mail = Mail(app)
+
+######### CLOUDINARY CONFIG ############
+cloudinary.config(
+  cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+  api_key = os.environ.get('CLOUDINARY_API_KEY'),
+  api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+  secure = True
+)
 
 ######### DATABASE CONFIG ##############
 basedir = os.path.abspath(os.path.dirname(__file__))
