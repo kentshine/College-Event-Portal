@@ -67,8 +67,9 @@ span {
 
 .event-card-overview {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
   max-width: 150rem;
+  width: 100%;
   gap: 2rem;
   margin-top: 3rem;
 }
@@ -95,29 +96,41 @@ span {
 .event-card-body {
   padding: 2.2rem 2rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .event-card-heading {
   font-size: 2rem;
   font-weight: 700;
   margin: 1rem 1rem;
+  word-break: break-word;
 }
 
 .event-card-desc {
   color: #626262;
   font-size: 1.2rem;
   margin: auto 1rem 1rem 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .event-stats {
   font-size: 1.6rem;
   padding: 1rem;
-  margin: 0 2rem;
+  margin: 0 0.5rem;
+  margin-top: auto;
 }
 
 .event-stats li {
   padding-bottom: 1rem;
   vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-stats i {

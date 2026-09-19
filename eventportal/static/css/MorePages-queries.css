@@ -40,10 +40,7 @@
 }
 
 @media only screen and (max-width: 64em) {
-  .event-card-overview {
-    grid-template-columns: repeat(2, minmax(28rem, 38rem));
-    gap: 3rem;
-  }
+  /* Let auto-fill handle the grid */
 
   .event-card .event-types-list li {
     padding: 0.6rem 0.8rem;
@@ -94,11 +91,11 @@
     }
 
     .event-card-overview {
-      grid-template-columns: auto;
+      /* Handled by auto-fill */
     }
 
     .event-card {
-      width: 40rem;
+      width: auto;
     }
 
     .event-card-body {
@@ -124,13 +121,7 @@
 
   @media only screen and (max-width: 30em) {
     .event-card {
-      width: 32rem;
+      width: auto;
     }
-  }
-}
-
-@media only screen and (max-width: 1560em) {
-  .event-card {
-    height: 46rem;
   }
 }

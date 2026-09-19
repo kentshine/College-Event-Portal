@@ -452,11 +452,11 @@ small {
 
 .dropdown-content a:hover {
   background-color: #f4f7f6;
-  color: #3f0071;
+  color: #2c5282;
 }
 
 .dropdown-content a:hover i {
-  color: #3f0071;
+  color: #2c5282;
 }
 
 .dropdown-content.show {
